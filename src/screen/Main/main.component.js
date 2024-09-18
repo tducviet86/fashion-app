@@ -40,8 +40,8 @@ const Main = () => {
           data={SAMPLE_DATA}
           renderItem={({ item }) => <Item data={item} />}
           keyExtractor={(item) => item.id.toString()}
-          horizontal={true} // Set to true if you want horizontal scrolling
-          showsHorizontalScrollIndicator={false} // Hide the scroll indicator
+          horizontal={true} // chỉnh cuộn dọc thành ngang
+          showsHorizontalScrollIndicator={false} // ẩn cột scroll ở cuộn ngang
         />
       </View>
     </ScrollView>
