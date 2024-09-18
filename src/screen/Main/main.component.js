@@ -1,28 +1,50 @@
-import { View, Image, Text, SafeAreaView, FlatList } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import SAMPLE_DATA from "../../../data.sample";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
+import Item from "./item/item.component";
 import styles from "./main.style";
 
 const Main = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <View style={styles.containerImage}>
-          <Image
-            source={require("../../../assets/Image/main-fashion.jpeg")}
-            style={styles.imageFashion}
-          />
-          <View style={styles.titleFashion}>
-            <Text style={styles.title}>Fashion </Text>
-            <Text style={styles.title}>sale </Text>
-            <PrimaryButton style={styles.button}>Check</PrimaryButton>
-          </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.containerImage}>
+        <Image
+          source={require("../../../assets/Image/main.jpg")}
+          style={styles.imageFashion}
+        />
+        <View style={styles.titleFashion}>
+          <Text style={styles.title}>Fashion </Text>
+          <Text style={[styles.title, { marginBottom: 20 }]}>sale </Text>
+          <PrimaryButton style={styles.button}>Check</PrimaryButton>
         </View>
       </View>
-      <View>
-        <FlatList data={SAMPLE_DATA} renderItem={{}} />
+      <View style={styles.newSection}>
+        <View style={styles.new}>
+          <View>
+            <Text style={styles.newTitle}>New</Text>
+            <Text style={styles.newDescription}>
+              You've never seen it before!
+            </Text>
+          </View>
+          <Text style={styles.viewAll}>View all</Text>
+        </View>
+
+        <FlatList
+          data={SAMPLE_DATA}
+          renderItem={({ item }) => <Item data={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true} // Set to true if you want horizontal scrolling
+          showsHorizontalScrollIndicator={false} // Hide the scroll indicator
+        />
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 export default Main;
