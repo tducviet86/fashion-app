@@ -6,9 +6,14 @@ const Item = (props) => {
   const { data } = props;
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: data.image }} />
-      <StarRatingDisplay style={styles.rating} starSize={23} rating={4.5} />
-      <View style={styles.item}>
+      <View style={styles.newImage}>
+        <Image style={styles.image} source={{ uri: data.image }} />
+        <Text style={styles.label}>NEW</Text>
+      </View>
+      <View style={styles.rating}>
+        <StarRatingDisplay style={styles.rating} starSize={24} rating={4.8} />
+      </View>
+      <View style={styles.infoBox}>
         <Text style={styles.brand}>{data.brand}</Text>
         <Text style={styles.title}>{data.name}</Text>
         <Text style={styles.price}>{data.price}$</Text>

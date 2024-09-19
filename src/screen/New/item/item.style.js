@@ -10,10 +10,32 @@ const styles = StyleSheet.create({
     height: 250,
     borderRadius: 20,
   },
-  item: {
+  newImage: {
+    position: "relative",
+  },
+  label: {
+    position: "absolute",
+    top: 20,
+    left: 10,
+    color: "#fff",
+    backgroundColor: "#000",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 15,
+    borderWidth: 1,
+    zIndex: 10,
+    fontSize: 12,
+    fontSize: 12,
+    fontWeight: "900",
+    textAlign: "center",
+  },
+  infoBox: {
     paddingHorizontal: 5,
   },
-  rating: {},
+  rating: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   brand: {
     fontSize: 14,
     lineHeight: 14,
