@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   newSection: {
     paddingHorizontal: 20,
     paddingVertical: 35,
-    backgroundColor: "#fff",
+    backgroundColor: "#rgba(249, 249, 249, 1)",
   },
   new: {
     flexDirection: "row",

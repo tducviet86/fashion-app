@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import New from "../New/new.component";
+import Sale from "../Sale/sale.component";
 import styles from "./main.style";
 
 const Main = () => {
@@ -24,8 +25,9 @@ const Main = () => {
           <PrimaryButton style={styles.button}>Check</PrimaryButton>
         </View>
       </View>
-      <View>
+      <View style={{ backgroundColor: "rgba(249, 249, 249, 1)" }}>
         <New />
+        <Sale />
       </View>
     </ScrollView>
   );

@@ -9,7 +9,7 @@ const Item = (props) => {
     <View style={styles.container}>
       <View style={styles.newImage}>
         <Image style={styles.image} source={{ uri: data.image }} />
-        <Text style={styles.label}>NEW</Text>
+        <Text style={styles.label}>Sale</Text>
         <TouchableOpacity style={styles.favorites}>
           <Ionicons
             name="heart-outline"
