@@ -15,12 +15,11 @@ import Register from "./src/screen/Register/register.componet";
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const App = () => (
-  // <NavigationContainer>
-  //   <Stack.Navigator screenOptions={{ headerShown: false }}>
-  //     <Stack.Screen name="HomeStack" component={HomeStack} />
-  //   </Stack.Navigator>
-  // </NavigationContainer>
-  <Register />
+  <NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="HomeStack" component={HomeStack} />
+    </Stack.Navigator>
+  </NavigationContainer>
 );
 const HomeStack = () => (
   <BottomTab.Navigator
