@@ -10,15 +10,17 @@ import Main from "./src/screen/Main/main.component";
 import Profile from "./src/screen/Profile/profile.component";
 import Shop from "./src/screen/Shop/shop.component";
 import TabBar from "./src/component/tab-bar/tab-bar.component.js";
+import Register from "./src/screen/Register/register.componet";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const App = () => (
-  <NavigationContainer>
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="HomeStack" component={HomeStack} />
-    </Stack.Navigator>
-  </NavigationContainer>
+  // <NavigationContainer>
+  //   <Stack.Navigator screenOptions={{ headerShown: false }}>
+  //     <Stack.Screen name="HomeStack" component={HomeStack} />
+  //   </Stack.Navigator>
+  // </NavigationContainer>
+  <Register />
 );
 const HomeStack = () => (
   <BottomTab.Navigator

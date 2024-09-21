@@ -19,7 +19,6 @@ function Login() {
           <TextInput
             placeholder="Password"
             // secureTextEntry="true"
-
             style={styles.input}
           />
           <TouchableOpacity style={styles.forgotPassword}>
@@ -40,11 +39,7 @@ function Login() {
           </View>
         </View>
       </View>
-      <TouchableOpacity
-        hitSlop={10}
-        style={styles.closeButton}
-        // onPress={() => navigation.goBack()}
-      >
+      <TouchableOpacity hitSlop={10} style={styles.closeButton}>
         <Ionicons name="chevron-back" size={30} color={"#495057"} />
       </TouchableOpacity>
     </SafeAreaView>
