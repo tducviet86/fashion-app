@@ -50,5 +50,15 @@ const SAMPLE_DATA = [
     image: "https://picsum.photos/300/300?id=7",
   },
 ];
+export const dataWomen = [
+  { id: "1", title: "New", image: require("./assets/Image/women_1.png") },
+  { id: "2", title: "Clothes", image: require("./assets/Image/women_2.png") },
+  { id: "3", title: "Shoes", image: require("./assets/Image/women_3.png") },
+  {
+    id: "4",
+    title: "Accessories",
+    image: require("./assets/Image/women_4.png"),
+  },
+];
 
 export default SAMPLE_DATA;
