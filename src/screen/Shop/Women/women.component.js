@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import { dataWomen } from "../../../../data.sample";
 import styles from "./women.style";
 const Women = () => {
@@ -15,12 +15,12 @@ const Women = () => {
         data={dataWomen}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.categoryItem}>
+          <TouchableOpacity style={styles.categoryItem}>
             <View style={styles.textContainer}>
               <Text style={styles.categoryTitle}>{item.title}</Text>
             </View>
             <Image source={item.image} style={styles.categoryImage} />
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>
