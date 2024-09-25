@@ -13,19 +13,19 @@ const styles = StyleSheet.create({
   newImage: {
     position: "relative",
   },
-  label: {
+  labelContainer: {
     position: "absolute",
     top: 20,
     left: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    color: "#fff",
-    // borderWidth: 1,
     backgroundColor: "#e74c3c",
+    borderRadius: 20,
     zIndex: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+  },
+  label: {
+    color: "#fff",
     fontSize: 12,
-    // fontSize: 12,
-    borderRadius: 15,
     fontWeight: "900",
     textAlign: "center",
   },
@@ -62,9 +62,20 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     fontWeight: "600",
   },
+  infoPrice: {
+    flexDirection: "row",
+  },
+  priceDiscount: {
+    marginRight: 8,
+    color: "gray",
+    fontWeight: "500",
+    fontSize: 18,
+    textDecorationLine: "line-through",
+  },
   price: {
     color: "#ff0000",
     fontWeight: "500",
+    fontSize: 18,
   },
 });
 export default styles;

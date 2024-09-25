@@ -13,18 +13,19 @@ const styles = StyleSheet.create({
   newImage: {
     position: "relative",
   },
-  label: {
+
+  labelContainer: {
     position: "absolute",
     top: 20,
     left: 10,
-    color: "#fff",
     backgroundColor: "#000",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 15,
-    borderWidth: 1,
+    borderRadius: 20,
     zIndex: 10,
-    fontSize: 12,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  label: {
+    color: "#fff",
     fontSize: 12,
     fontWeight: "900",
     textAlign: "center",
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
   price: {
     color: "#ff0000",
     fontWeight: "500",
+    fontSize: 18,
   },
 });
 export default styles;

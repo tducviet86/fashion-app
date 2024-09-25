@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  ImageBackground,
 } from "react-native";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import New from "../New/new.component";
@@ -15,15 +16,12 @@ const Main = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.containerImage}>
-        <Image
-          source={require("../../../assets/Image/main.jpg")}
+        <ImageBackground
+          source={require("../../../assets/Image/home.jpeg")}
           style={styles.imageFashion}
-        />
-        <View style={styles.titleFashion}>
-          <Text style={styles.title}>Fashion </Text>
-          <Text style={[styles.title, { marginBottom: 20 }]}>sale </Text>
-          <PrimaryButton style={styles.button}>Check</PrimaryButton>
-        </View>
+        >
+          <Text style={styles.title}>Street clothes </Text>
+        </ImageBackground>
       </View>
       <View style={{ backgroundColor: "rgba(249, 249, 249, 1)" }}>
         <New />

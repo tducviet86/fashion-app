@@ -1,32 +1,30 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-const { height: screenHeight } = Dimensions.get("window");
+const { height: screenHeight, width: screenWidth } = Dimensions.get("window");
 // Nó cập nhật kick thước khi thay đổi
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   imageFashion: {
-    width: 439,
-    height: 628,
+    width: screenWidth * 1.15,
+    height: 260,
+    justifyContent: "center",
+    alignItems: "center",
   },
   containerImage: {
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
-    height: screenHeight * 0.6,
-  },
-  titleFashion: {
-    position: "absolute",
-    bottom: 35,
-    left: 20,
-    justifyContent: "flex-end",
+    // height: screenHeight * 0.9,
   },
   title: {
+    position: "absolute",
+    bottom: 35,
+    left: 60,
     color: "#FFFFFF",
-    fontSize: 48,
+    fontSize: 40,
     fontWeight: "800",
-    textAlign: "left",
   },
   button: {
     marginTop: 10,

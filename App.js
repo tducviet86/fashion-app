@@ -11,15 +11,19 @@ import Profile from "./src/screen/Profile/profile.component";
 import Shop from "./src/screen/Shop/shop.component";
 import TabBar from "./src/component/tab-bar/tab-bar.component.js";
 import Register from "./src/screen/Register/register.componet";
+import { Provider } from "react-redux";
+import store from "./src/redux/store";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const App = () => (
-  <NavigationContainer>
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="HomeStack" component={HomeStack} />
-    </Stack.Navigator>
-  </NavigationContainer>
+  <Provider store={store}>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="HomeStack" component={HomeStack} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  </Provider>
 );
 const HomeStack = () => (
   <BottomTab.Navigator
