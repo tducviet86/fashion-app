@@ -1,24 +1,28 @@
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import styles from "./new.style";
 import SAMPLE_DATA from "../../../data.sample";
 import Item from "./item/item.component";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
-  fetchProductThunk,
-  getProductByTagThunk,
+  // fetchProductThunk,
+  getProductByNewThunk,
 } from "../../redux/home/home.thunk";
 const New = () => {
   const list = useSelector((state) => state.home.list["new"]);
+  const loading = useSelector((state) => state.home.loading["new"]);
   const dispatch = useDispatch();
-
+  // them hieu loading
   useEffect(() => {
-    dispatch(getProductByTagThunk("new"));
+    dispatch(getProductByNewThunk("new"));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(fetchProductThunk("new"));
-  // }, []);
   return (
     <View style={styles.newSection}>
       <View style={styles.new}>
@@ -32,14 +36,17 @@ const New = () => {
           <Text style={styles.viewAll}>View all</Text>
         </TouchableOpacity>
       </View>
-
-      <FlatList
-        data={list}
-        renderItem={({ item }) => <Item data={item} />}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal={true} // chỉnh cuộn dọc thành ngang
-        showsHorizontalScrollIndicator={false} // ẩn cột scroll ở cuộn ngang
-      />
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <FlatList
+          data={list}
+          renderItem={({ item }) => <Item data={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true} // chỉnh cuộn dọc thành ngang
+          showsHorizontalScrollIndicator={false} // ẩn cột scroll ở cuộn ngang
+        />
+      )}
     </View>
   );
 };

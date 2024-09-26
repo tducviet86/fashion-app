@@ -17,5 +17,22 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "600",
   },
+  categories: {
+    paddingHorizontal: 20,
+    paddingTop: 10,
+  },
+  categoryItem: {
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+  },
+  categoryText: {
+    fontSize: 18,
+    color: "#333",
+  },
+  separator: {
+    height: 1,
+    backgroundColor: "#ddd",
+  },
 });
 export default styles;

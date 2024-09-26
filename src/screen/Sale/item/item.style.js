@@ -29,22 +29,7 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     textAlign: "center",
   },
-  favorites: {
-    position: "absolute",
-    bottom: -22,
-    right: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    // borderWidth: 1,
-    backgroundColor: "#fff",
-    shadowColor: "#212529",
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    shadowOpacity: 0.5,
-    elevation: 6,
-    borderRadius: 30,
-    zIndex: 10,
-  },
+
   infoBox: {
     paddingHorizontal: 5,
   },

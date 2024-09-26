@@ -14,13 +14,23 @@ export const fetchProductThunk = createAsyncThunk(
     return products;
   }
 );
-export const getProductByTagThunk = createAsyncThunk(
-  "products/getProductByTagThunk",
-  async (tag) => {
+export const getProductBySaleThunk = createAsyncThunk(
+  "products/getProductBySaleThunk",
+  async () => {
     const response = await authInstance.get("/products-tag", {
-      params: { tag },
+      params: { tag: "sale" },
     });
     const { products } = response.data;
-    return { tag, products };
+    return products;
+  }
+);
+export const getProductByNewThunk = createAsyncThunk(
+  "products/getProductByNewThunk",
+  async (tag) => {
+    const response = await authInstance.get("/products-tag", {
+      params: { tag: "new" },
+    });
+    const { products } = response.data;
+    return products;
   }
 );
