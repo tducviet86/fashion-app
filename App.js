@@ -13,6 +13,7 @@ import TabBar from "./src/component/tab-bar/tab-bar.component.js";
 import Register from "./src/screen/Register/register.componet";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
+import Category from "./src/screen/Category/category.component";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -21,9 +22,19 @@ const App = () => (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="HomeStack" component={HomeStack} />
+        <Stack.Screen name="Shop" component={ShopStack} />
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>
+);
+const ShopStack = () => (
+  <Stack.Navigator
+    screenOptions={{ headerShown: false }}
+    initialRouteName="Shop"
+  >
+    <Stack.Screen name="shop" component={Shop} />
+    <Stack.Screen name="category" component={Category} />
+  </Stack.Navigator>
 );
 const HomeStack = () => (
   <BottomTab.Navigator
@@ -36,8 +47,8 @@ const HomeStack = () => (
       options={{ tabBarLabel: "Home", icon: "home-outline" }}
     />
     <BottomTab.Screen
-      name="shop"
-      component={Shop}
+      name="ShopStack"
+      component={ShopStack}
       options={{ tabBarLabel: "Shop", icon: "cart-outline" }}
     />
     <BottomTab.Screen

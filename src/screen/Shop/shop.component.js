@@ -1,25 +1,37 @@
+import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, FlatList, TouchableOpacity } from "react-native";
+import { Text, View, FlatList, TouchableOpacity, Modal } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import styles from "./shop.style";
-const CATEGORIES = [
-  { id: "1", name: "Tops" },
-  { id: "2", name: "Shirts & Blouses" },
-  { id: "3", name: "Cardigans & Sweaters" },
-  { id: "4", name: "Knitwear" },
-  { id: "5", name: "Blazers" },
-  { id: "6", name: "Outerwear" },
-  { id: "7", name: "Pants" },
-  { id: "8", name: "Jeans" },
-  { id: "9", name: "Shorts" },
-  { id: "10", name: "Skirts" },
-  { id: "11", name: "Dresses" },
-];
+import {
+  getProductByCategory,
+  getProductToShop,
+} from "../../redux/shop/shop.thunk";
+
 const Shop = () => {
-  const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.categoryItem}>
-      <Text style={styles.categoryText}>{item.name}</Text>
-    </TouchableOpacity>
-  );
+  const navigation = useNavigation();
+  const listShop = useSelector((state) => state.shop.listCategory);
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getProductByCategory());
+  // }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getProductToShop());
+  }, [dispatch]);
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        style={styles.categoryItem}
+        onPress={() => navigation.navigate("category")}
+      >
+        <Text style={styles.categoryText}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -28,9 +40,9 @@ const Shop = () => {
       </View>
       <View style={styles.categories}>
         <FlatList
-          data={CATEGORIES}
+          data={listShop}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
       </View>
