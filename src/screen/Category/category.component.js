@@ -3,7 +3,8 @@ import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./category.style";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
-const Category = () => {
+const Category = (props) => {
+  const { data } = props;
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -13,7 +14,7 @@ const Category = () => {
           <Ionicons name="chevron-back" size={30} color={"#495057"} />
         </TouchableOpacity>
         <View>
-          <Text style={styles.title}>Categories</Text>
+          <Text style={styles.title}>{data.name}</Text>
         </View>
         <TouchableOpacity hitSlop={10}>
           <Ionicons name="search-outline" size={30} color={"#495057"} />

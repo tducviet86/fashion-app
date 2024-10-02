@@ -21,7 +21,9 @@ const Item = (props) => {
         <Text style={styles.title}>{data.name}</Text>
         <View style={styles.infoPrice}>
           <Text style={styles.priceDiscount}>{data.price}$</Text>
-          <Text style={styles.price}>{data.price}$</Text>
+          <Text style={styles.price}>
+            {data.price - (data.price * data.discount * 100) / 100}$
+          </Text>
         </View>
       </View>
     </View>

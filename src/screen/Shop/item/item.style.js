@@ -5,62 +5,14 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginRight: 30,
   },
-  image: {
-    width: 184,
-    height: 250,
-    borderRadius: 20,
+  categoryItem: {
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
   },
-  newImage: {
-    position: "relative",
-  },
-  labelContainer: {
-    position: "absolute",
-    top: 20,
-    left: 10,
-    backgroundColor: "#e74c3c",
-    borderRadius: 20,
-    zIndex: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-  },
-  label: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "900",
-    textAlign: "center",
-  },
-
-  infoBox: {
-    paddingHorizontal: 5,
-  },
-  rating: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  brand: {
-    fontSize: 14,
-    lineHeight: 14,
-    color: "rgba(155, 155, 155, 1)",
-  },
-  title: {
+  categoryText: {
     fontSize: 18,
-    lineHeight: 18,
-    fontWeight: "600",
-  },
-  infoPrice: {
-    flexDirection: "row",
-  },
-  priceDiscount: {
-    marginRight: 8,
-    color: "gray",
-    fontWeight: "500",
-    fontSize: 18,
-    textDecorationLine: "line-through",
-  },
-  price: {
-    color: "#ff0000",
-    fontWeight: "500",
-    fontSize: 18,
+    color: "#333",
   },
 });
 export default styles;
