@@ -15,8 +15,8 @@ import {
   getProductByNewThunk,
 } from "../../redux/home/home.thunk";
 const New = () => {
-  const list = useSelector((state) => state.home.list["new"]);
-  const loading = useSelector((state) => state.home.loading["new"]);
+  const list = useSelector((state) => state.home.list.new);
+  const loading = useSelector((state) => state.home.loading.new);
   const dispatch = useDispatch();
   // them hieu loading
   useEffect(() => {
@@ -32,9 +32,6 @@ const New = () => {
             You've never seen it before!
           </Text>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.viewAll}>View all</Text>
-        </TouchableOpacity>
       </View>
       {loading ? (
         <ActivityIndicator size="large" />

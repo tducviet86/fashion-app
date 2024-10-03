@@ -1,28 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProductByCategory, getProductToShop } from "./shop.thunk";
+import { getCategories, getProductsToCategory } from "./shop.thunk";
 
 const INIT_STATE = {
-  list: [],
-  listCategory: [],
+  category: [],
+  loading: false,
+  list: {},
 };
 const shopSlice = createSlice({
   name: "shop",
   initialState: INIT_STATE,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProductToShop.fulfilled, (state, action) => {
-      const { payload } = action;
-      state.list = payload;
-      const categories = payload.map((product) => product.category);
-      state.listCategory = [...new Set(categories)].map((category, index) => ({
-        id: index + 1,
-        name: category,
-      }));
+    builder.addCase(getCategories.pending, (state, action) => {
+      state.loading = true;
     });
-    builder.addCase(getProductByCategory.fulfilled, (state, action) => {
+    builder.addCase(getCategories.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.category = payload;
+      state.loading = false;
+    });
+    builder.addCase(getProductsToCategory.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getProductsToCategory.fulfilled, (state, action) => {
       const { payload } = action;
       state.list = payload;
-      // console.log(payload);
+      state.loading = false;
     });
   },
 });

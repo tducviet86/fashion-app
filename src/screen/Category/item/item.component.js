@@ -3,16 +3,15 @@ import { StarRatingDisplay } from "react-native-star-rating-widget";
 import styles from "./item.style";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { HOST } from "../../../helpers/api";
-
 const Item = (props) => {
   const { data } = props;
   return (
     <View style={styles.container}>
       <View style={styles.newImage}>
         <Image style={styles.image} source={{ uri: `${HOST}/${data.image}` }} />
-        <View style={styles.labelContainer}>
-          <Text style={styles.label}>New</Text>
-        </View>
+        {/* <View style={styles.labelContainer}>
+          <Text style={styles.label}>-{data.discount * 100}%</Text>
+        </View> */}
       </View>
       <View style={styles.rating}>
         <StarRatingDisplay

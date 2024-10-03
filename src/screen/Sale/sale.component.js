@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductBySaleThunk } from "../../redux/home/home.thunk";
 const Sale = () => {
-  const list = useSelector((state) => state.home.list["sale"]);
-  const loading = useSelector((state) => state.home.loading["sale"]);
+  const list = useSelector((state) => state.home.list.sale);
+  const loading = useSelector((state) => state.home.loading.sale);
 
   const dispatch = useDispatch();
 

@@ -14,7 +14,11 @@ const Item = (props) => {
         </View>
       </View>
       <View style={styles.rating}>
-        <StarRatingDisplay style={styles.rating} starSize={24} rating={4.8} />
+        <StarRatingDisplay
+          style={styles.rating}
+          starSize={24}
+          rating={data.rating}
+        />
       </View>
       <View style={styles.infoBox}>
         <Text style={styles.brand}>{data.brand}</Text>

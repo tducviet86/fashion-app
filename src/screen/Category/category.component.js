@@ -1,11 +1,34 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import styles from "./category.style";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProductsToCategory } from "../../redux/shop/shop.thunk";
+import Item from "./item/item.component";
 const Category = (props) => {
-  const { data } = props;
+  const {
+    route: {
+      params: { data },
+    },
+  } = props;
+  const { loading, list } = useSelector((state) => state.shop);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data.id) {
+      dispatch(getProductsToCategory(data.id));
+    }
+  }, [dispatch, data.id]);
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -20,7 +43,19 @@ const Category = (props) => {
           <Ionicons name="search-outline" size={30} color={"#495057"} />
         </TouchableOpacity>
       </View>
-      <View></View>
+      <View>
+        {loading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <FlatList
+            data={list}
+            renderItem={({ item }) => <Item data={item} />}
+            keyExtractor={(item) => item.id.toString()}
+            numColumns={2} // Specify the number of columns
+            columnWrapperStyle={styles.columnWrapper} // Optional: add styles for columns
+          />
+        )}
+      </View>
     </View>
   );
 };
