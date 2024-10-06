@@ -11,24 +11,37 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getProductsToCategory } from "../../redux/shop/shop.thunk";
+import {
+  getSubCategoryByCategory,
+  getProductsByCategory,
+} from "../../redux/category/category.thunk";
 import Item from "./item/item.component";
+
 const Category = (props) => {
   const {
     route: {
       params: { data },
     },
   } = props;
-  const { loading, list } = useSelector((state) => state.shop);
+  const { loading, list, category } = useSelector((state) => state.category);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (data.id) {
-      dispatch(getProductsToCategory(data.id));
-    }
-  }, [dispatch, data.id]);
+    dispatch(getProductsByCategory(data.id));
+    dispatch(getSubCategoryByCategory(data.id));
+  }, []);
 
+  // useEffect(() => {
+  //   dispatch(getChildrenByProducts());
+  // }, [dispatch]);
+  const subCategory = ({ item }) => (
+    <View>
+      <TouchableOpacity style={styles.categoryItem}>
+        <Text style={styles.item}>{item.name}</Text>
+      </TouchableOpacity>
+    </View>
+  );
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -43,6 +56,31 @@ const Category = (props) => {
           <Ionicons name="search-outline" size={30} color={"#495057"} />
         </TouchableOpacity>
       </View>
+      <View style={styles.subCategory}>
+        <FlatList
+          data={category}
+          renderItem={subCategory}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style
+        />
+        <View style={styles.toolbarContainer}>
+          <TouchableOpacity style={styles.toolbarButton}>
+            <Ionicons name="filter-outline" size={24} color={"#495057"} />
+            <Text style={styles.toolbarText}>Filters</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.toolbarButton}>
+            <Ionicons name="arrow-down-outline" size={24} color={"#495057"} />
+            <Text style={styles.toolbarText}>Price: lowest to high</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.toolbarButton}>
+            <Ionicons name="list-sharp" size={24} color="#495057" />
+          </TouchableOpacity>
+        </View>
+      </View>
       <View>
         {loading ? (
           <ActivityIndicator size="large" />
@@ -51,8 +89,8 @@ const Category = (props) => {
             data={list}
             renderItem={({ item }) => <Item data={item} />}
             keyExtractor={(item) => item.id.toString()}
-            numColumns={2} // Specify the number of columns
-            columnWrapperStyle={styles.columnWrapper} // Optional: add styles for columns
+            numColumns={2}
+            columnWrapperStyle={styles.columnWrapper}
           />
         )}
       </View>

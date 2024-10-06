@@ -4,7 +4,7 @@ import { getCategories, getProductsToCategory } from "./shop.thunk";
 const INIT_STATE = {
   category: [],
   loading: false,
-  list: {},
+  list: [],
 };
 const shopSlice = createSlice({
   name: "shop",
@@ -19,14 +19,7 @@ const shopSlice = createSlice({
       state.category = payload;
       state.loading = false;
     });
-    builder.addCase(getProductsToCategory.pending, (state, action) => {
-      state.loading = true;
-    });
-    builder.addCase(getProductsToCategory.fulfilled, (state, action) => {
-      const { payload } = action;
-      state.list = payload;
-      state.loading = false;
-    });
   },
 });
 export default shopSlice.reducer;
+// tao 2 loading or tao them 1 slice
