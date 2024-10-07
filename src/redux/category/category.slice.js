@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getSubCategoryByCategory,
   getProductsByCategory,
+  getSubCategory,
 } from "./category.thunk";
 
 const INIT_STATE = {
@@ -25,6 +26,10 @@ const categorySlice = createSlice({
     builder.addCase(getSubCategoryByCategory.fulfilled, (state, action) => {
       const { payload } = action;
       state.category = payload;
+    });
+    builder.addCase(getSubCategory.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.list = payload;
     });
   },
 });

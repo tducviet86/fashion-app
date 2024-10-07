@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
   },
   containerShop: {
     flexDirection: "row",
@@ -23,6 +24,10 @@ const styles = StyleSheet.create({
   },
   subCategory: {
     backgroundColor: "#fff",
+
+    shadowColor: "#ccc",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.6,
   },
   categoryItem: {
     backgroundColor: "#000",
@@ -50,6 +55,27 @@ const styles = StyleSheet.create({
   toolbarText: {
     marginLeft: 5,
     color: "#495057",
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: "50%",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  modalOption: {
+    paddingVertical: 10,
+    fontSize: 16,
   },
 });
 export default styles;

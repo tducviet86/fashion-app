@@ -20,3 +20,12 @@ export const getSubCategoryByCategory = createAsyncThunk(
     return categories;
   }
 );
+export const getSubCategory = createAsyncThunk(
+  "categories/getSubCategory",
+
+  async (id) => {
+    const response = await authInstance.get(`/sub-categories/${id}/products`);
+    const { products } = response.data;
+    return products;
+  }
+);

@@ -10,10 +10,11 @@ import styles from "./category.style";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getSubCategoryByCategory,
   getProductsByCategory,
+  getSubCategory,
 } from "../../redux/category/category.thunk";
 import Item from "./item/item.component";
 
@@ -32,12 +33,12 @@ const Category = (props) => {
     dispatch(getSubCategoryByCategory(data.id));
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(getChildrenByProducts());
-  // }, [dispatch]);
   const subCategory = ({ item }) => (
     <View>
-      <TouchableOpacity style={styles.categoryItem}>
+      <TouchableOpacity
+        style={styles.categoryItem}
+        onPress={() => dispatch(getSubCategory(item.id))}
+      >
         <Text style={styles.item}>{item.name}</Text>
       </TouchableOpacity>
     </View>
@@ -66,21 +67,23 @@ const Category = (props) => {
           style
         />
         <View style={styles.toolbarContainer}>
-          <TouchableOpacity style={styles.toolbarButton}>
+          <TouchableOpacity
+            style={styles.toolbarButton}
+            onPress={() => setFilterModalVisible(true)}
+          >
             <Ionicons name="filter-outline" size={24} color={"#495057"} />
             <Text style={styles.toolbarText}>Filters</Text>
           </TouchableOpacity>
-
           <TouchableOpacity style={styles.toolbarButton}>
             <Ionicons name="arrow-down-outline" size={24} color={"#495057"} />
             <Text style={styles.toolbarText}>Price: lowest to high</Text>
           </TouchableOpacity>
-
           <TouchableOpacity style={styles.toolbarButton}>
             <Ionicons name="list-sharp" size={24} color="#495057" />
           </TouchableOpacity>
         </View>
       </View>
+
       <View>
         {loading ? (
           <ActivityIndicator size="large" />
