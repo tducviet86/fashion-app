@@ -14,6 +14,7 @@ import Register from "./src/screen/Register/register.componet";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import Category from "./src/screen/Category/category.component";
+import Filter from "./src/screen/Filters/filters.component";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -34,6 +35,7 @@ const ShopStack = () => (
   >
     <Stack.Screen name="shop" component={Shop} />
     <Stack.Screen name="category" component={Category} />
+    <Stack.Screen name="filter" component={Filter} />
   </Stack.Navigator>
 );
 const HomeStack = () => (
