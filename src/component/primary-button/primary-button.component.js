@@ -1,8 +1,8 @@
 import { Text, TouchableOpacity } from "react-native";
 import styles from "./primary-button.style";
 
-const PrimaryButton = ({ children }) => (
-  <TouchableOpacity style={styles.container}>
+const PrimaryButton = ({ children, onPress }) => (
+  <TouchableOpacity style={styles.container} onPress={onPress}>
     {typeof children === "string" ? (
       <Text style={styles.text}>{children}</Text>
     ) : (
