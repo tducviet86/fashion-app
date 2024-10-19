@@ -6,9 +6,14 @@ import { Slider } from "@miblanchard/react-native-slider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import styles from "./filters.style";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter } from "../../redux/category/category.slice";
+import { getProductsByCategory } from "../../redux/category/category.thunk";
 
 const Filter = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.category.filter);
   const [range, setRange] = useState([0, 1000]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -22,40 +27,32 @@ const Filter = () => {
     "#E2BB8D",
     "#151867",
   ];
+
   const sizes = ["XS", "S", "M", "L", "XL"];
-  const categories = ["All", "T-Shorts", "Blouse"];
+  const categories = ["T-Shorts", "Blouse"];
 
+  // luu vao` redux
+  // viet state, cap nhat gia tri tu filter redux
+  // chua click apply luu tru vao` state sau khi click apply thi` luu vao` redux
   useEffect(() => {
-    const loadFilters = async () => {
-      try {
-        const savedRange = await AsyncStorage.getItem("range");
-        const savedColor = await AsyncStorage.getItem("color");
-        const savedSize = await AsyncStorage.getItem("size");
-        const savedCategory = await AsyncStorage.getItem("category");
-
-        if (savedRange) setRange(JSON.parse(savedRange));
-        if (savedColor) setSelectedColor(savedColor);
-        if (savedSize) setSelectedSize(savedSize);
-        if (savedCategory) setSelectedCategory(savedCategory);
-      } catch (error) {
-        console.error("Failed to load filters:", error);
-      }
-    };
-
-    loadFilters();
+    setRange(filter.range);
+    setSelectedColor(filter.color);
+    setSelectedSize(filter.size);
+    setSelectedCategory(filter.category);
   }, []);
-  const saveFilters = async () => {
-    console.log("Apply button pressed");
-    try {
-      await AsyncStorage.setItem("range", JSON.stringify(range));
-      await AsyncStorage.setItem("color", selectedColor || "");
-      await AsyncStorage.setItem("size", selectedSize || "");
-      await AsyncStorage.setItem("category", selectedCategory || "");
-    } catch (error) {
-      console.error("Failed to save filters:", error);
-    }
+  const applyFilter = () => {
+    dispatch(
+      getProductsByCategory({
+        filter: {
+          range: range,
+          color: selectedColor,
+          size: selectedSize,
+          category: selectedCategory,
+        },
+      })
+    );
+    navigation.goBack();
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.containerShop}>
@@ -74,7 +71,6 @@ const Filter = () => {
           { paddingBottom: 100 },
         ]}
       >
-        {/* Price Range */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Price range</Text>
           <View style={styles.priceSlider}>
@@ -97,7 +93,6 @@ const Filter = () => {
           </View>
         </View>
 
-        {/* Colors */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Colors</Text>
           <View style={styles.colorContainer}>
@@ -115,7 +110,6 @@ const Filter = () => {
           </View>
         </View>
 
-        {/* Sizes */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Sizes</Text>
           <View style={styles.sizeContainer}>
@@ -159,7 +153,7 @@ const Filter = () => {
         <PrimaryButton onPress={() => navigation.goBack()}>
           Discard
         </PrimaryButton>
-        <PrimaryButton onPress={saveFilters}>Apply</PrimaryButton>
+        <PrimaryButton onPress={applyFilter}>Apply</PrimaryButton>
       </View>
     </View>
   );

@@ -67,7 +67,10 @@ const Category = (props) => {
           style
         />
         <View style={styles.toolbarContainer}>
-          <TouchableOpacity style={styles.toolbarButton}>
+          <TouchableOpacity
+            style={styles.toolbarButton}
+            onPress={() => navigation.navigate("filter")}
+          >
             <Ionicons name="filter-outline" size={24} color={"#495057"} />
             <Text style={styles.toolbarText}>Filters</Text>
           </TouchableOpacity>
@@ -75,10 +78,7 @@ const Category = (props) => {
             <Ionicons name="arrow-down-outline" size={24} color={"#495057"} />
             <Text style={styles.toolbarText}>Price: lowest to high</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.toolbarButton}
-            onPress={() => navigation.navigate("filter")}
-          >
+          <TouchableOpacity style={styles.toolbarButton}>
             <Ionicons name="list-sharp" size={24} color="#495057" />
           </TouchableOpacity>
         </View>

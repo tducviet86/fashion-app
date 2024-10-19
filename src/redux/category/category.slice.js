@@ -9,11 +9,22 @@ const INIT_STATE = {
   loading: false,
   list: [],
   category: [],
+  filter: {
+    range: [0, 1000],
+    color: "",
+    size: "",
+    category: "",
+  },
 };
 const categorySlice = createSlice({
   name: "category",
   initialState: INIT_STATE,
-  reducers: {},
+  reducers: {
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
+    setCatetory: () => {},
+  },
   extraReducers: (builder) => {
     builder.addCase(getProductsByCategory.pending, (state, action) => {
       state.loading = true;
@@ -33,4 +44,5 @@ const categorySlice = createSlice({
     });
   },
 });
+export const { setFilter } = categorySlice.actions;
 export default categorySlice.reducer;
