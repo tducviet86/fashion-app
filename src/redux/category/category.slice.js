@@ -23,7 +23,9 @@ const categorySlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
-    setCatetory: () => {},
+    setCategory: (state, action) => {
+      state.category = action.payload.category;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProductsByCategory.pending, (state, action) => {
@@ -40,9 +42,10 @@ const categorySlice = createSlice({
     });
     builder.addCase(getSubCategory.fulfilled, (state, action) => {
       const { payload } = action;
+      console.log("pr: ", state.list);
       state.list = payload;
     });
   },
 });
-export const { setFilter } = categorySlice.actions;
+export const { setFilter, setCategory } = categorySlice.actions;
 export default categorySlice.reducer;

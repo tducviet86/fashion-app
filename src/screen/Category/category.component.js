@@ -25,9 +25,9 @@ const Category = (props) => {
     },
   } = props;
   const { loading, list, category } = useSelector((state) => state.category);
+  console.log("Redux state - list: ", list);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getProductsByCategory(data.id));
     dispatch(getSubCategoryByCategory(data.id));
@@ -64,7 +64,6 @@ const Category = (props) => {
           keyExtractor={(item) => item.id.toString()}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          style
         />
         <View style={styles.toolbarContainer}>
           <TouchableOpacity

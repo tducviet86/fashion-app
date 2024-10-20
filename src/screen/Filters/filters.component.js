@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { Slider } from "@miblanchard/react-native-slider";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import styles from "./filters.style";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilter } from "../../redux/category/category.slice";
-import { getProductsByCategory } from "../../redux/category/category.thunk";
+import { getSubCategory } from "../../redux/category/category.thunk"; // Sử dụng getSubCategory
 
-const Filter = () => {
+const Filter = (props) => {
+  const { data } = props;
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.category.filter);
+  const category = useSelector((state) => state.category.category);
   const [range, setRange] = useState([0, 1000]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -29,20 +35,18 @@ const Filter = () => {
   ];
 
   const sizes = ["XS", "S", "M", "L", "XL"];
-  const categories = ["T-Shorts", "Blouse"];
 
-  // luu vao` redux
-  // viet state, cap nhat gia tri tu filter redux
-  // chua click apply luu tru vao` state sau khi click apply thi` luu vao` redux
   useEffect(() => {
     setRange(filter.range);
     setSelectedColor(filter.color);
     setSelectedSize(filter.size);
     setSelectedCategory(filter.category);
   }, []);
+
   const applyFilter = () => {
     dispatch(
-      getProductsByCategory({
+      getSubCategory({
+        id: data,
         filter: {
           range: range,
           color: selectedColor,
@@ -53,6 +57,22 @@ const Filter = () => {
     );
     navigation.goBack();
   };
+
+  const subCategory = ({ item }) => (
+    <View>
+      <TouchableOpacity
+        key={item.id}
+        style={[
+          styles.categoryButton,
+          selectedCategory === item.id && styles.selectedCategoryButton,
+        ]}
+        onPress={() => setSelectedCategory(item.id)}
+      >
+        <Text style={styles.item}>{item.name}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.containerShop}>
@@ -62,7 +82,6 @@ const Filter = () => {
         <View>
           <Text style={styles.title}>Filter</Text>
         </View>
-        <TouchableOpacity></TouchableOpacity>
       </View>
 
       <ScrollView
@@ -128,24 +147,15 @@ const Filter = () => {
           </View>
         </View>
 
-        {/* Categories */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Category</Text>
-          <View style={styles.categoryContainer}>
-            {categories.map((category) => (
-              <TouchableOpacity
-                key={category}
-                style={[
-                  styles.categoryButton,
-                  selectedCategory === category &&
-                    styles.selectedCategoryButton,
-                ]}
-                onPress={() => setSelectedCategory(category)}
-              >
-                <Text>{category}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <Text style={styles.sectionTitle}>Sub-Category</Text>
+          <FlatList
+            data={category}
+            renderItem={subCategory}
+            keyExtractor={(item) => item.id.toString()}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
       </ScrollView>
 
