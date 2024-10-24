@@ -12,7 +12,8 @@ import { Slider } from "@miblanchard/react-native-slider";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import styles from "./filters.style";
 import { useDispatch, useSelector } from "react-redux";
-import { getSubCategory } from "../../redux/category/category.thunk"; // Sử dụng getSubCategory
+import { getSubCategory } from "../../redux/category/category.thunk";
+import { setFilter } from "../../redux/category/category.slice";
 
 const Filter = (props) => {
   const { data } = props;
@@ -20,10 +21,11 @@ const Filter = (props) => {
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.category.filter);
   const category = useSelector((state) => state.category.category);
-  const [range, setRange] = useState([0, 1000]);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const [range, setRange] = useState(filter.range);
+  const [selectedColor, setSelectedColor] = useState(filter.color);
+  const [selectedSize, setSelectedSize] = useState(filter.size);
+  const [selectedCategory, setSelectedCategory] = useState(filter.category);
 
   const colors = [
     "#020202",
@@ -41,18 +43,15 @@ const Filter = (props) => {
     setSelectedColor(filter.color);
     setSelectedSize(filter.size);
     setSelectedCategory(filter.category);
-  }, []);
+  }, [filter]);
 
   const applyFilter = () => {
     dispatch(
-      getSubCategory({
-        id: data,
-        filter: {
-          range: range,
-          color: selectedColor,
-          size: selectedSize,
-          category: selectedCategory,
-        },
+      setFilter({
+        range: range,
+        color: selectedColor,
+        size: selectedSize,
+        category: selectedCategory,
       })
     );
     navigation.goBack();
@@ -82,6 +81,7 @@ const Filter = (props) => {
         <View>
           <Text style={styles.title}>Filter</Text>
         </View>
+        <TouchableOpacity></TouchableOpacity>
       </View>
 
       <ScrollView

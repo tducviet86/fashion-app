@@ -24,14 +24,19 @@ const Category = (props) => {
       params: { data },
     },
   } = props;
-  const { loading, list, category } = useSelector((state) => state.category);
-  console.log("Redux state - list: ", list);
+
+  const { loading, list, category, filter } = useSelector(
+    (state) => state.category
+  );
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getProductsByCategory(data.id));
+    //
+
+    dispatch(getProductsByCategory({ id: data.id, filter }));
     dispatch(getSubCategoryByCategory(data.id));
-  }, []);
+  }, [filter]);
 
   const subCategory = ({ item }) => (
     <View>
@@ -43,6 +48,7 @@ const Category = (props) => {
       </TouchableOpacity>
     </View>
   );
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />

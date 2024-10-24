@@ -23,8 +23,8 @@ const categorySlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
-    setCategory: (state, action) => {
-      state.category = action.payload.category;
+    resetFilter: (state) => {
+      state.filter = { range: [0, 1000], color: "", size: "", category: "" };
     },
   },
   extraReducers: (builder) => {
@@ -42,10 +42,9 @@ const categorySlice = createSlice({
     });
     builder.addCase(getSubCategory.fulfilled, (state, action) => {
       const { payload } = action;
-      console.log("pr: ", state.list);
       state.list = payload;
     });
   },
 });
-export const { setFilter, setCategory } = categorySlice.actions;
+export const { setFilter, resetFilter } = categorySlice.actions;
 export default categorySlice.reducer;

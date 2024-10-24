@@ -1,12 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  Text,
-  View,
-  FlatList,
-  ActivityIndicator,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
+import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import styles from "./shop.style";
@@ -16,11 +9,9 @@ import Item from "./item/item.component";
 const Shop = () => {
   const { loading, category } = useSelector((state) => state.shop);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
-
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
