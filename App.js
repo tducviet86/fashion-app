@@ -15,6 +15,7 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import Category from "./src/screen/Category/category.component";
 import Filter from "./src/screen/Filters/filters.component";
+import ProductDetails from "./src/screen/Product-Details/product-details.component";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -24,6 +25,7 @@ const App = () => (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="HomeStack" component={HomeStack} />
         <Stack.Screen name="Shop" component={ShopStack} />
+        <Stack.Screen name="product" component={ProductStack} />
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>
@@ -36,6 +38,15 @@ const ShopStack = () => (
     <Stack.Screen name="shop" component={Shop} />
     <Stack.Screen name="category" component={Category} />
     <Stack.Screen name="filter" component={Filter} />
+  </Stack.Navigator>
+);
+const ProductStack = () => (
+  <Stack.Navigator
+    screenOptions={{ headerShown: false }}
+    initialRouteName="Main"
+  >
+    <Stack.Screen name="main" component={Main} />
+    <Stack.Screen name="product-details" component={ProductDetails} />
   </Stack.Navigator>
 );
 const HomeStack = () => (

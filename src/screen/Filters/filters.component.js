@@ -15,8 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSubCategory } from "../../redux/category/category.thunk";
 import { setFilter } from "../../redux/category/category.slice";
 
-const Filter = (props) => {
-  const { data } = props;
+const Filter = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.category.filter);
