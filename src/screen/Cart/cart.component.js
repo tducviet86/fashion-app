@@ -21,7 +21,7 @@ const Cart = () => {
         <Text style={styles.title}>My Bag</Text>
       </View>
       <FlatList
-        data={cartItems}
+        data={{}}
         renderItem={({ item }) => <Item data={item} />}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}

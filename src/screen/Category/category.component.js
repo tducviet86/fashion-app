@@ -33,7 +33,6 @@ const Category = (props) => {
 
   useEffect(() => {
     //
-
     dispatch(getProductsByCategory({ id: data.id, filter }));
     dispatch(getSubCategoryByCategory(data.id));
   }, [filter]);
@@ -42,7 +41,15 @@ const Category = (props) => {
     <View>
       <TouchableOpacity
         style={styles.categoryItem}
-        onPress={() => dispatch(getSubCategory(item.id))}
+        onPress={() => {
+          console.log("Subcategory ID:", item.subCategoryId);
+          dispatch(
+            getProductsByCategory({
+              id: data.id,
+              filter: { ...filter, category: item.id },
+            })
+          );
+        }}
       >
         <Text style={styles.item}>{item.name}</Text>
       </TouchableOpacity>

@@ -40,10 +40,10 @@ const categorySlice = createSlice({
       const { payload } = action;
       state.category = payload;
     });
-    builder.addCase(getSubCategory.fulfilled, (state, action) => {
-      const { payload } = action;
-      state.list = payload;
-    });
+    // builder.addCase(getSubCategory.fulfilled, (state, action) => {
+    //   const { payload } = action;
+    //   state.list = payload;
+    // });
   },
 });
 export const { setFilter, resetFilter } = categorySlice.actions;

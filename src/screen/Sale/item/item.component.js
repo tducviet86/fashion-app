@@ -3,10 +3,15 @@ import { StarRatingDisplay } from "react-native-star-rating-widget";
 import styles from "./item.style";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { HOST } from "../../../helpers/api";
+import { useNavigation } from "@react-navigation/native";
 const Item = (props) => {
   const { data } = props;
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate("product-details", { data })}
+    >
       <View style={styles.newImage}>
         <Image style={styles.image} source={{ uri: `${HOST}/${data.image}` }} />
         <View style={styles.labelContainer}>
@@ -30,7 +35,7 @@ const Item = (props) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 export default Item;

@@ -11,6 +11,7 @@ import Item from "./item/item.component";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductBySaleThunk } from "../../redux/home/home.thunk";
+
 const Sale = () => {
   const list = useSelector((state) => state.home.list.sale);
   const loading = useSelector((state) => state.home.loading.sale);
@@ -27,9 +28,6 @@ const Sale = () => {
           <Text style={styles.newTitle}>Sale</Text>
           <Text style={styles.newDescription}>Super summer sale</Text>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.viewAll}>View all</Text>
-        </TouchableOpacity>
       </View>
 
       {loading ? (

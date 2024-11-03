@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  FlatList,
-  TouchableOpacity,
-  Animated,
-} from "react-native";
+import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import styles from "./product-details.style";
 import { FontAwesome } from "@expo/vector-icons";
 import { HOST } from "../../helpers/api";
@@ -57,6 +49,7 @@ const ProductDetails = (props) => {
               <FontAwesome name="heart-o" size={20} color="black" />
             </TouchableOpacity>
           </View>
+
           <View style={styles.detailsContainer}>
             <Text style={styles.productName}>{data.name}</Text>
             <View style={styles.row}>
@@ -68,6 +61,7 @@ const ProductDetails = (props) => {
               <FontAwesome name="star" size={16} color="orange" /> {data.rating}{" "}
               (1000+ reviews)
             </Text>
+
             <Text style={styles.description}>
               Short dress in soft cotton jersey with decorative buttons down the
               front and a wide, frill-trimmed.

@@ -25,7 +25,8 @@ const App = () => (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="HomeStack" component={HomeStack} />
         <Stack.Screen name="Shop" component={ShopStack} />
-        <Stack.Screen name="product" component={ProductStack} />
+        {/* <Stack.Screen name="product" component={ProductStack} /> */}
+        <Stack.Screen name="product-details" component={ProductDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>
@@ -40,15 +41,15 @@ const ShopStack = () => (
     <Stack.Screen name="filter" component={Filter} />
   </Stack.Navigator>
 );
-const ProductStack = () => (
-  <Stack.Navigator
-    screenOptions={{ headerShown: false }}
-    initialRouteName="Main"
-  >
-    <Stack.Screen name="main" component={Main} />
-    <Stack.Screen name="product-details" component={ProductDetails} />
-  </Stack.Navigator>
-);
+// const ProductStack = () => (
+//   <Stack.Navigator
+//     screenOptions={{ headerShown: false }}
+//     initialRouteName="Main"
+//   >
+//     <Stack.Screen name="main" component={Main} />
+//     <Stack.Screen name="product-details" component={ProductDetails} />
+//   </Stack.Navigator>
+// );
 const HomeStack = () => (
   <BottomTab.Navigator
     screenOptions={{ headerShown: false }}

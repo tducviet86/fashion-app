@@ -1,7 +1,7 @@
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { StarRatingDisplay } from "react-native-star-rating-widget";
 import styles from "./item.style";
-import Ionicons from "@expo/vector-icons/Ionicons";
+// import Ionicons from "@expo/vector-icons/Ionicons";
 import { HOST } from "../../../helpers/api";
 import { useNavigation } from "@react-navigation/native";
 
@@ -11,12 +11,7 @@ const Item = (props) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() =>
-        navigation.navigate("product", {
-          screen: "product-details",
-          params: { data },
-        })
-      }
+      onPress={() => navigation.navigate("product-details", { data })}
     >
       <View style={styles.newImage}>
         <Image style={styles.image} source={{ uri: `${HOST}/${data.image}` }} />
