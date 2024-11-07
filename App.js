@@ -11,12 +11,15 @@ import Profile from "./src/screen/Profile/profile.component";
 import Shop from "./src/screen/Shop/shop.component";
 import TabBar from "./src/component/tab-bar/tab-bar.component.js";
 import Register from "./src/screen/Register/register.componet";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./src/redux/store";
 import Category from "./src/screen/Category/category.component";
 import Filter from "./src/screen/Filters/filters.component";
 import ProductDetails from "./src/screen/Product-Details/product-details.component";
+import ProtectedScreen from "./src/component/ProtectedRoute/protectedRoute.component";
+import { injectStore } from "./src/helpers/api";
 
+injectStore(store);
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const App = () => (
@@ -50,38 +53,43 @@ const ShopStack = () => (
 //     <Stack.Screen name="product-details" component={ProductDetails} />
 //   </Stack.Navigator>
 // );
-const HomeStack = () => (
-  <BottomTab.Navigator
-    screenOptions={{ headerShown: false }}
-    tabBar={(props) => <TabBar {...props} />}
-  >
-    <BottomTab.Screen
-      name="main"
-      component={Main}
-      options={{ tabBarLabel: "Home", icon: "home-outline" }}
-    />
-    <BottomTab.Screen
-      name="ShopStack"
-      component={ShopStack}
-      options={{ tabBarLabel: "Shop", icon: "cart-outline" }}
-    />
-    <BottomTab.Screen
-      name="cart"
-      component={Cart}
-      options={{ tabBarLabel: "Bag", icon: "bag-handle-outline" }}
-    />
-    <BottomTab.Screen
-      name="favorites"
-      component={Favorites}
-      options={{ tabBarLabel: "Favorites", icon: "heart-outline" }}
-    />
-    <BottomTab.Screen
-      name="profile"
-      component={Profile}
-      options={{ tabBarLabel: "Home", icon: "person-outline" }}
-    />
-  </BottomTab.Navigator>
-);
+const HomeStack = () => {
+  const token = useSelector((state) => state.auth.token);
+  return (
+    <BottomTab.Navigator
+      screenOptions={{ headerShown: false }}
+      tabBar={(props) => <TabBar {...props} />}
+    >
+      <BottomTab.Screen
+        name="main"
+        component={Main}
+        options={{ tabBarLabel: "Home", icon: "home-outline" }}
+      />
+      <BottomTab.Screen
+        name="ShopStack"
+        component={ShopStack}
+        options={{ tabBarLabel: "Shop", icon: "cart-outline" }}
+      />
+      <BottomTab.Screen
+        name="cart"
+        component={
+          token ? Cart : <Stack.Screen name="login" component={Login} />
+        }
+        options={{ tabBarLabel: "Bag", icon: "bag-handle-outline" }}
+      />
+      <BottomTab.Screen
+        name="favorites"
+        component={Favorites}
+        options={{ tabBarLabel: "Favorites", icon: "heart-outline" }}
+      />
+      <BottomTab.Screen
+        name="profile"
+        component={Profile}
+        options={{ tabBarLabel: "Home", icon: "person-outline" }}
+      />
+    </BottomTab.Navigator>
+  );
+};
 
 export default App;
 const styles = StyleSheet.create({

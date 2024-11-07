@@ -6,19 +6,52 @@ import {
   TouchableOpacity,
 } from "react-native";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "./login.style";
+import { loginThunk } from "../../redux/auth/auth.thunk";
 
 function Login() {
+  const username = useRef("");
+  const password = useRef("");
+  const dispatch = useDispatch();
+  const onLogin = async () => {
+    if (username.current === "") {
+      alert("Tên đăng nhập không được bỏ trống");
+      return;
+    }
+
+    if (password.current === "") {
+      alert("Mật khẩu không được bỏ trống");
+      return;
+    }
+    const formData = {
+      username: username.current,
+      password: password.current,
+    };
+
+    try {
+      await dispatch(loginThunk(formData)).unwrap();
+    } catch (error) {
+      alert("Username or Password is not valid");
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.containerLogin}>
         <Text style={styles.header}>Login</Text>
         <View>
-          <TextInput placeholder="Email" style={styles.input} />
+          <TextInput
+            placeholder="Email"
+            style={styles.input}
+            onChangeText={(text) => (username.current = text)}
+          />
           <TextInput
             placeholder="Password"
-            // secureTextEntry="true"
+            secureTextEntry={true}
+            onChangeText={(text) => (password.current = text)}
             style={styles.input}
           />
           <TouchableOpacity style={styles.forgotPassword}>
@@ -26,7 +59,7 @@ function Login() {
             <Ionicons name="arrow-forward" size={24} color="black" />
           </TouchableOpacity>
         </View>
-        <PrimaryButton>Login</PrimaryButton>
+        <PrimaryButton onPress={onLogin}>Login</PrimaryButton>
       </View>
       <View style={styles.loginWithAccount}>
         <Text>or Login with social account </Text>

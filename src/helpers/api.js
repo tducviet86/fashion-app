@@ -10,3 +10,22 @@ export const instance = axios.create({
 export const authInstance = axios.create({
   baseURL: HOST,
 });
+
+authInstance.interceptors.request.use(
+  (config) => {
+    //lay token
+    const token = store.getState().auth.token;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+authInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  }
+);
