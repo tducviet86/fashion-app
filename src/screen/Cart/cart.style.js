@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const screenWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -6,26 +8,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     padding: 16,
   },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginVertical: 16,
-  },
-  list: {
-    paddingBottom: 16,
-  },
   containerBag: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 10,
-    // paddingTop: 50,
     paddingBottom: 10,
-    // backgroundColor: "rgba(249, 249, 249, 1)",
   },
   title: {
     fontSize: 24,
     fontWeight: "600",
+  },
+  list: {
+    paddingBottom: 16,
   },
   footer: {
     flexDirection: "row",
@@ -56,5 +50,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  swipeAction: {
+    backgroundColor: "#e53935",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 80,
+    height: "85%",
+  },
+  deleteText: {
+    color: "#fff",
+    fontWeight: "bold",
+    padding: 10,
+    textAlign: "center",
+  },
 });
+
 export default styles;

@@ -26,7 +26,7 @@ export const getProductBySaleThunk = createAsyncThunk(
 );
 export const getProductByNewThunk = createAsyncThunk(
   "products/getProductByNewThunk",
-  async (tag) => {
+  async () => {
     const response = await authInstance.get("/products-tag", {
       params: { tag: "new" },
     });

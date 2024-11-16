@@ -1,11 +1,13 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./item.style";
+import { HOST } from "../../../helpers/api";
+
 const Item = (props) => {
   const { data } = props;
   return (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: data.image }} style={styles.image} />
+      <Image source={{ uri: `${HOST}/${data.image}` }} style={styles.image} />
       <View style={styles.itemDetails}>
         <Text style={styles.itemName}>{data.name}</Text>
         <Text style={styles.itemInfo}>

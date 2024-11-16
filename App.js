@@ -1,38 +1,55 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Cart from "./src/screen/Cart/cart.component";
 import Favorites from "./src/screen/Favorites/favorites.component";
-import Login from "./src/screen/Login/login.component";
 import Main from "./src/screen/Main/main.component";
 import Profile from "./src/screen/Profile/profile.component";
 import Shop from "./src/screen/Shop/shop.component";
 import TabBar from "./src/component/tab-bar/tab-bar.component.js";
-import Register from "./src/screen/Register/register.componet";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "./src/redux/store";
 import Category from "./src/screen/Category/category.component";
 import Filter from "./src/screen/Filters/filters.component";
 import ProductDetails from "./src/screen/Product-Details/product-details.component";
-import ProtectedScreen from "./src/component/ProtectedRoute/protectedRoute.component";
 import { injectStore } from "./src/helpers/api";
+import { useEffect } from "react";
+import { getTokenThunk } from "./src/redux/auth/auth.thunk";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 injectStore(store);
+// AsyncStorage.clear();
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const App = () => (
   <Provider store={store}>
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="HomeStack" component={HomeStack} />
-        <Stack.Screen name="Shop" component={ShopStack} />
-        {/* <Stack.Screen name="product" component={ProductStack} /> */}
-        <Stack.Screen name="product-details" component={ProductDetails} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Controller />
   </Provider>
+);
+
+const Controller = () => {
+  const dispatch = useDispatch();
+
+  const setup = async () => {
+    await dispatch(getTokenThunk());
+  };
+
+  useEffect(() => {
+    setup();
+  }, []);
+
+  return <ProtectedStack />;
+};
+const ProtectedStack = () => (
+  <NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="HomeStack" component={HomeStack} />
+      <Stack.Screen name="Shop" component={ShopStack} />
+      {/* <Stack.Screen name="product" component={ProductStack} /> */}
+      <Stack.Screen name="product-details" component={ProductDetails} />
+    </Stack.Navigator>
+  </NavigationContainer>
 );
 const ShopStack = () => (
   <Stack.Navigator
@@ -44,17 +61,8 @@ const ShopStack = () => (
     <Stack.Screen name="filter" component={Filter} />
   </Stack.Navigator>
 );
-// const ProductStack = () => (
-//   <Stack.Navigator
-//     screenOptions={{ headerShown: false }}
-//     initialRouteName="Main"
-//   >
-//     <Stack.Screen name="main" component={Main} />
-//     <Stack.Screen name="product-details" component={ProductDetails} />
-//   </Stack.Navigator>
-// );
+
 const HomeStack = () => {
-  const token = useSelector((state) => state.auth.token);
   return (
     <BottomTab.Navigator
       screenOptions={{ headerShown: false }}
@@ -72,9 +80,7 @@ const HomeStack = () => {
       />
       <BottomTab.Screen
         name="cart"
-        component={
-          token ? Cart : <Stack.Screen name="login" component={Login} />
-        }
+        component={Cart}
         options={{ tabBarLabel: "Bag", icon: "bag-handle-outline" }}
       />
       <BottomTab.Screen

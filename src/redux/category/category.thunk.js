@@ -31,6 +31,7 @@ export const getSubCategoryByCategory = createAsyncThunk(
     return categories;
   }
 );
+
 // export const getSubCategory = createAsyncThunk(
 //   "categories/getSubCategory",
 //   async (id) => {

@@ -6,6 +6,9 @@ import { HOST } from "../../helpers/api";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { AddToCart } from "../../redux/cart/cartThunk";
+import { addToCart } from "../../redux/cart/cartSlice";
 
 const ProductDetails = (props) => {
   const {
@@ -14,12 +17,19 @@ const ProductDetails = (props) => {
     },
   } = props;
   const navigation = useNavigation();
-
-  const addToCart = () => {
-    const product = {
-      ...data,
-      // id: data.id,
-    };
+  const dispatch = useDispatch();
+  const handleAddToCart = async () => {
+    try {
+      const product = {
+        productId: data.id,
+        quantity: 1,
+      };
+      //api
+      await dispatch(AddToCart(product));
+      alert("Đã thêm sản phẩm thành công");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <View style={styles.container}>
@@ -78,8 +88,8 @@ const ProductDetails = (props) => {
           </View>
         </View>
       </ScrollView>
-      <View style={[styles.addToCartButton]} onPress={addToCart}>
-        <PrimaryButton>Add To Cart</PrimaryButton>
+      <View style={[styles.addToCartButton]}>
+        <PrimaryButton onPress={handleAddToCart}>Add To Cart</PrimaryButton>
       </View>
       <TouchableOpacity
         hitSlop={10}

@@ -39,7 +39,7 @@ function Login() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { flex: 1 }]}>
       <View style={styles.containerLogin}>
         <Text style={styles.header}>Login</Text>
         <View>
@@ -61,7 +61,7 @@ function Login() {
         </View>
         <PrimaryButton onPress={onLogin}>Login</PrimaryButton>
       </View>
-      <View style={styles.loginWithAccount}>
+      {/* <View style={styles.loginWithAccount}>
         <Text>or Login with social account </Text>
         <View style={{ flexDirection: "row" }}>
           <View style={styles.iconLogin}>
@@ -71,10 +71,7 @@ function Login() {
             <Ionicons name="logo-facebook" size={24} color="#3B5998" />
           </View>
         </View>
-      </View>
-      <TouchableOpacity hitSlop={10} style={styles.closeButton}>
-        <Ionicons name="chevron-back" size={30} color={"#495057"} />
-      </TouchableOpacity>
+      </View> */}
     </SafeAreaView>
   );
 }
