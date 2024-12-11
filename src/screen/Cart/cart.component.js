@@ -25,7 +25,9 @@ const Cart = () => {
 
     fetchData();
   }, []);
-
+  const totalItem = list.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
@@ -42,7 +44,7 @@ const Cart = () => {
       />
       <View style={styles.footer}>
         <Text style={styles.totalText}>Total amount:</Text>
-        <Text style={styles.totalAmount}>$124</Text>
+        <Text style={styles.totalAmount}>${totalItem}</Text>
       </View>
       <TouchableOpacity style={styles.checkoutButton}>
         <Text style={styles.checkoutButtonText}>CHECK OUT</Text>

@@ -9,7 +9,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 8,
   },
-  image: { width: 60, height: 60, borderRadius: 8, marginRight: 12 },
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+    marginRight: 12,
+  },
   itemDetails: { flex: 1 },
   itemName: { fontSize: 16, fontWeight: "bold" },
   itemInfo: { fontSize: 14, color: "#888", marginVertical: 4 },
@@ -18,7 +23,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 4,
   },
-  quantityButton: { fontSize: 20, color: "#333", paddingHorizontal: 10 },
+  quantityButton: {
+    fontSize: 22,
+    color: "#333",
+    paddingHorizontal: 10,
+  },
   quantityText: { fontSize: 16, paddingHorizontal: 8 },
   price: { fontSize: 16, fontWeight: "bold", color: "#333" },
 });
