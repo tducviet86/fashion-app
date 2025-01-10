@@ -1,16 +1,48 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import styles from "./item.style";
+
 import { HOST } from "../../../helpers/api";
+import { updateQuantity } from "../../../redux/cart/cartThunk";
+
+import styles from "./item.style";
 
 const Item = (props) => {
   const { data } = props;
   const [quantity, setQuantity] = useState(data.quantity);
-  const increaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setQuantity(data.quantity);
+  }, [data.quantity]);
+
+  const increaseQuantity = async () => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+
+    if (data.productId) {
+      try {
+        await dispatch(
+          updateQuantity({ productId: data.productId, quantity: newQuantity })
+        );
+      } catch (error) {
+        console.error("Error updating quantity:", error);
+      }
+    }
   };
-  const decreaseQuantity = () => {
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const decreaseQuantity = async () => {
+    const newQuantity = Math.max(quantity - 1, 1);
+    setQuantity(newQuantity);
+
+    if (data.productId) {
+      try {
+        await dispatch(
+          updateQuantity({ productId: data.productId, quantity: newQuantity })
+        );
+      } catch (error) {
+        console.error("Error updating quantity:", error);
+      }
+    }
   };
   return (
     <View style={styles.itemContainer}>
@@ -34,5 +66,4 @@ const Item = (props) => {
     </View>
   );
 };
-
 export default Item;

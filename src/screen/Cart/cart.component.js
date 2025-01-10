@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -12,22 +11,26 @@ import Item from "./item/item.component";
 import styles from "./cart.style";
 import WithAuth from "../../middlewares/withAuth";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { getCart } from "../../redux/cart/cartThunk";
 
 const Cart = () => {
   const { list } = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getCart());
     };
-
     fetchData();
-  }, []);
-  const totalItem = list.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
+  }, [dispatch]);
+
+  const totalItem = useMemo(() => {
+    return (
+      list?.reduce((total, item) => total + item.price * item.quantity, 0) || 0
+    );
+  }, [list]);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
@@ -38,7 +41,7 @@ const Cart = () => {
         data={list}
         renderItem={({ item }) => (item ? <Item data={item} /> : null)}
         keyExtractor={(item) =>
-          item?.id?.toString() || Math.random().toString()
+          item?.id?.toString() || item?.productId?.toString()
         }
         contentContainerStyle={styles.list}
       />

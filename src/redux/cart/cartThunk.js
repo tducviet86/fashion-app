@@ -10,7 +10,6 @@ export const AddToCart = createAsyncThunk(
         quantity,
       });
       const { cart } = response.data;
-
       return cart;
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -27,3 +26,20 @@ export const getCart = createAsyncThunk("cart/getCart", async () => {
     console.log("Error fetching cart:", error);
   }
 });
+export const updateQuantity = createAsyncThunk(
+  "cart/updateQuantity",
+  async ({ productId, quantity }) => {
+    try {
+      const response = await authInstance.put(`/cart/updateQuantity`, {
+        productId: productId,
+        quantity: quantity,
+      });
+      console.log(response.data);
+      const { cart } = response.data;
+      return cart;
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+      throw error;
+    }
+  }
+);

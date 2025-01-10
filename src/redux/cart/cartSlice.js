@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AddToCart, getCart } from "./cartThunk";
+import { AddToCart, getCart, updateQuantity } from "./cartThunk";
 
 const INIT_STATE = {
   loading: false,
@@ -22,6 +22,11 @@ const cartSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.list = payload;
+      state.loading = false;
+    });
+    builder.addCase(updateQuantity.fulfilled, (state, action) => {
       const { payload } = action;
       state.list = payload;
       state.loading = false;
