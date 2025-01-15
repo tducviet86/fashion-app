@@ -16,6 +16,8 @@ import ProductDetails from "./src/screen/Product-Details/product-details.compone
 import { injectStore } from "./src/helpers/api";
 import { useEffect } from "react";
 import { getTokenThunk } from "./src/redux/auth/auth.thunk";
+import Checkout from "./src/screen/Checkout/checkout.component.js";
+import Success from "./src/screen/Success/success.component.js";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
 injectStore(store);
@@ -48,6 +50,8 @@ const ProtectedStack = () => (
       <Stack.Screen name="Shop" component={ShopStack} />
       {/* <Stack.Screen name="product" component={ProductStack} /> */}
       <Stack.Screen name="product-details" component={ProductDetails} />
+      <Stack.Screen name="checkout" component={Checkout} />
+      <Stack.Screen name="success" component={Success} />
     </Stack.Navigator>
   </NavigationContainer>
 );
@@ -83,11 +87,11 @@ const HomeStack = () => {
         component={Cart}
         options={{ tabBarLabel: "Bag", icon: "bag-handle-outline" }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="favorites"
         component={Favorites}
         options={{ tabBarLabel: "Favorites", icon: "heart-outline" }}
-      />
+      /> */}
       <BottomTab.Screen
         name="profile"
         component={Profile}

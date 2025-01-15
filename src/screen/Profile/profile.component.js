@@ -9,6 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import styles from "./profile.style";
+import PrimaryButton from "../../component/primary-button/primary-button.component";
 
 const Profile = () => {
   const profileOptions = [
@@ -54,8 +55,8 @@ const Profile = () => {
           style={styles.profileImage}
         />
         <View>
-          <Text style={styles.profileName}>Matilda Brown</Text>
-          <Text style={styles.profileEmail}>matildabrown@mail.com</Text>
+          <Text style={styles.profileName}>Tran Duc Viet</Text>
+          <Text style={styles.profileEmail}>tranducvietdtu@mail.com</Text>
         </View>
       </View>
       <FlatList
@@ -64,6 +65,7 @@ const Profile = () => {
         renderItem={renderOption}
         contentContainerStyle={styles.optionsList}
       />
+      <PrimaryButton>Log out</PrimaryButton>
     </SafeAreaView>
   );
 };

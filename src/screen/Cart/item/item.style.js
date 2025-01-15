@@ -15,9 +15,18 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginRight: 12,
   },
-  itemDetails: { flex: 1 },
-  itemName: { fontSize: 16, fontWeight: "bold" },
-  itemInfo: { fontSize: 14, color: "#888", marginVertical: 4 },
+  itemDetails: {
+    flex: 1,
+  },
+  itemName: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  itemInfo: {
+    fontSize: 14,
+    color: "#888",
+    marginVertical: 4,
+  },
   quantityContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -28,7 +37,19 @@ const styles = StyleSheet.create({
     color: "#333",
     paddingHorizontal: 10,
   },
-  quantityText: { fontSize: 16, paddingHorizontal: 8 },
-  price: { fontSize: 16, fontWeight: "bold", color: "#333" },
+  quantityText: {
+    fontSize: 16,
+    paddingHorizontal: 8,
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  deleteButton: {
+    position: "absolute",
+    top: 5,
+    right: 5,
+  },
 });
 export default styles;

@@ -6,7 +6,7 @@ const PrimaryButton = ({ children, onPress }) => (
     {typeof children === "string" ? (
       <Text style={styles.text}>{children}</Text>
     ) : (
-      { children }
+      children
     )}
   </TouchableOpacity>
 );

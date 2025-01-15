@@ -13,11 +13,13 @@ import WithAuth from "../../middlewares/withAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo } from "react";
 import { getCart } from "../../redux/cart/cartThunk";
+import { useNavigation } from "@react-navigation/native";
 
 const Cart = () => {
   const { list } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +51,10 @@ const Cart = () => {
         <Text style={styles.totalText}>Total amount:</Text>
         <Text style={styles.totalAmount}>${totalItem}</Text>
       </View>
-      <TouchableOpacity style={styles.checkoutButton}>
+      <TouchableOpacity
+        style={styles.checkoutButton}
+        onPress={() => navigation.navigate("checkout", { total: totalItem })}
+      >
         <Text style={styles.checkoutButtonText}>CHECK OUT</Text>
       </TouchableOpacity>
     </SafeAreaView>

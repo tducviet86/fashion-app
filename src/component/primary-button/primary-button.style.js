@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingVertical: 13,
+    paddingVertical: 15,
     borderRadius: 6,
     shadowColor: "#ccc",
     shadowOffset: { width: 0, height: 2 },

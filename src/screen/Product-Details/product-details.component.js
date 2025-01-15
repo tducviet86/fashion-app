@@ -68,8 +68,8 @@ const ProductDetails = (props) => {
             </View>
 
             <Text style={styles.rating}>
-              <FontAwesome name="star" size={16} color="orange" /> {data.rating}{" "}
-              (1000+ reviews)
+              <FontAwesome name="star" size={16} color="orange" />{" "}
+              <Text>{data.rating} (1000+ reviews)</Text>
             </Text>
 
             <Text style={styles.description}>
