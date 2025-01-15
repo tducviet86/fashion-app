@@ -9,7 +9,7 @@ const withAuth = (WrappedComponent) => {
     if (!token) {
       return <Login {...props} />;
     }
-    return <WrappedComponent {...props} />;
+    return <WrappedCompnent {...props} />;
   };
 };
 export default withAuth;
