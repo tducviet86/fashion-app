@@ -6,7 +6,7 @@ import { HOST } from "../../helpers/api";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddToCart } from "../../redux/cart/cartThunk";
 import { addToCart } from "../../redux/cart/cartSlice";
 
@@ -16,17 +16,24 @@ const ProductDetails = (props) => {
       params: { data },
     },
   } = props;
+  const { token } = useSelector((state) => state.auth);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const handleAddToCart = async () => {
     try {
-      const product = {
-        productId: data.id,
-        quantity: 1,
-      };
-      //api
-      await dispatch(AddToCart(product));
-      alert("Đã thêm sản phẩm thành công");
+      if (!token) {
+        alert("Vui lòng đăng nhập để mua hàng");
+        navigation.navigate("login");
+        return;
+      } else {
+        const product = {
+          productId: data.id,
+          quantity: 1,
+        };
+        //api
+        await dispatch(AddToCart(product));
+        alert("Đã thêm sản phẩm thành công");
+      }
     } catch (error) {
       console.log(error);
     }

@@ -11,11 +11,13 @@ import { useDispatch } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "./login.style";
 import { loginThunk } from "../../redux/auth/auth.thunk";
+import { useNavigation } from "@react-navigation/native";
 
 function Login() {
   const username = useRef("");
   const password = useRef("");
   const dispatch = useDispatch();
+  const navigation = useNavigation;
   const onLogin = async () => {
     if (username.current === "") {
       alert("Tên đăng nhập không được bỏ trống");
@@ -33,6 +35,7 @@ function Login() {
 
     try {
       await dispatch(loginThunk(formData)).unwrap();
+      navigation.navigate("HomeStack");
     } catch (error) {
       alert("Username or Password is not valid");
     }

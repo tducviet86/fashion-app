@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { getTokenThunk } from "./src/redux/auth/auth.thunk";
 import Checkout from "./src/screen/Checkout/checkout.component.js";
 import Success from "./src/screen/Success/success.component.js";
+import Login from "./src/screen/Login/login.component.js";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
 injectStore(store);
@@ -52,6 +53,7 @@ const ProtectedStack = () => (
       <Stack.Screen name="product-details" component={ProductDetails} />
       <Stack.Screen name="checkout" component={Checkout} />
       <Stack.Screen name="success" component={Success} />
+      <Stack.Screen name="login" component={Login} />
     </Stack.Navigator>
   </NavigationContainer>
 );

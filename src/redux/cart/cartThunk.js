@@ -54,3 +54,12 @@ export const removeFromCart = createAsyncThunk(
     }
   }
 );
+export const clearCart = createAsyncThunk("cart/clearCart", async () => {
+  try {
+    const response = await authInstance.delete(`/cart/clearCart}`);
+    const { cart } = response.data;
+    return cart;
+  } catch (error) {
+    console.error("Error removing from cart:", error);
+  }
+});

@@ -1,19 +1,17 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 
 import styles from "./checkout.style";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 const Checkout = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const total = route.params?.total ?? 0;
+  const data = useSelector((state) => state.cart.list);
+  const clearCart = () => {};
+  console.log(data);
+
   let ship = 15;
   return (
     <View style={styles.container}>
@@ -94,6 +92,13 @@ const Checkout = () => {
         <View style={styles.summarySection}>
           <View style={styles.summaryRow}>
             <Text style={styles.summaryLabel}>Order:</Text>
+            <View>
+              {data.map((item, index) => (
+                <Text key={index} style={styles.summaryLabel}>
+                  {item.name} x {item.price}$ x {item.quantity}
+                </Text>
+              ))}
+            </View>
             <Text style={styles.summaryValue}>{total}$</Text>
           </View>
           <View style={styles.summaryRow}>
