@@ -3,14 +3,18 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import styles from "./checkout.style";
 import PrimaryButton from "../../component/primary-button/primary-button.component";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../redux/cart/cartThunk";
 const Checkout = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const total = route.params?.total ?? 0;
-  const data = useSelector((state) => state.cart.list);
-  const clearCart = () => {};
-  console.log(data);
+  const data = useSelector((state) => state.cart.list) || [];
+  const dispatch = useDispatch();
+
+  console.log("Cart Data:", data);
+  console.log("Data Type:", typeof data);
+  console.log("Is Array:", Array.isArray(data));
 
   let ship = 15;
   return (
@@ -113,8 +117,11 @@ const Checkout = () => {
       </ScrollView>
       <View style={styles.submitButton}>
         <PrimaryButton
-          onPress={() => {
+          onPress={async () => {
             console.log("Navigating to Success...");
+            await dispatch(clearCart());
+            console.log("da clear");
+
             navigation.navigate("success");
           }}
         >

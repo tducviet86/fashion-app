@@ -4,6 +4,7 @@ import {
   getCart,
   updateQuantity,
   removeFromCart,
+  clearCart,
 } from "./cartThunk";
 
 const INIT_STATE = {
@@ -28,7 +29,7 @@ const cartSlice = createSlice({
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
       const { payload } = action;
-      state.list = payload;
+      state.list = Array.isArray(payload) ? payload : [];
       state.loading = false;
     });
     builder.addCase(updateQuantity.fulfilled, (state, action) => {
@@ -39,6 +40,11 @@ const cartSlice = createSlice({
     builder.addCase(removeFromCart.fulfilled, (state, action) => {
       const { payload } = action;
       state.list = payload;
+      state.loading = false;
+    });
+    builder.addCase(clearCart.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.list = Array.isArray(payload) ? payload : [];
       state.loading = false;
     });
   },
